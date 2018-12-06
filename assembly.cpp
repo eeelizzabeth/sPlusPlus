@@ -1,9 +1,3 @@
-//
-//  main.cpp
-//  FarquaadStarquad
-//
-//
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -28,114 +22,91 @@ int main()
     string regis;                   // if i am reading a register. Note I have 8 registered
     // which i call: R1, R2, R3, R4, R5, R6, R7, and R8.
     
-    while(!fin.eof())                   // while not reached end of file
+    while(!fin.eof())                           // while not reached end of file
     {
-        fin >> opcode;                  // the first line of every instruction is instruction
+        fin >> opcode;                          // the first line of every instruction is instruction
         
-        if(opcode == "onions")             // process the PUT instruction
+        if(opcode == "onions")                  // adding function
         {
-            out << "0001";              // PUT is 0011 as described in my ISA
-            fin >> num;                 // read in the decimal number
-            out << dec_to_binary(num);  // convert decimal to binary and place in file
-            fin >> regis;               // read in the register (i.e. R1, R2, R3, etc)
-            out << reg_to_bin(regis);   // this function will convert to appropriate address
-            out << endl;                // line break
-        }
-        else if(opcode == "donkey")        // process the SUM instruction
-        {
-            out << "0010";              // SUM is 0101 as described in my ISA
-            for(int i = 0; i < 3; i++)  // for loop that loops 3 times
+            out << "0001";                      // number one
+            for(int i = 0; i < 2; i++)
             {
-                fin >> regis;           // read in the register
-                out << reg_to_bin(regis); // this function will conver to appropriate address
+                fin >> regis;                   // read in the register
+                out << reg_to_bin(regis);       // this function will conver to appropriate address
             }
-            out << endl;                // line break
+            out << "0";
+            out << endl;                        // line break
         }
-        else if(opcode == "shrek4")        // process the OUT instruction
+        else if(opcode == "donkey")             // output function
         {
-            out << "0011";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
-        }                               // and use up 13 bits, per my ISA.
-        else if(opcode == "putinboots")        // process the OUT instruction
-        {
-            out << "0100";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0010";                      // number two
+            fin >> regis;
+            out << reg_to_bin(regis);
+            out << "0000" << endl;
         }
-        else if(opcode == "playMovie")        // process the OUT instruction
+        else if(opcode == "shrek4")             // halt function
         {
-            out << "0101";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0011";                      // number three
+            out << "0000000";                 // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "fatBoyz")        // process the OUT instruction
+        else if(opcode == "putinboots")         // insert function
         {
-            out << "0110";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0100";                      // number four
+            fin >> num;
+            out << dec_to_binary(num);
+            fin >> regis;
+            out << reg_to_bin(regis);
+            out << endl;
         }
-        else if(opcode == "farFarArray")        // process the OUT instruction
+        else if(opcode == "farFarArray")        // create an array
         {
-            out << "0111";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0101";                      // number five
+            fin >> num;                         // read in the register
+            out << dec_to_binary(num);          // this function will conver to appropriate address
+            fin >> regis;
+            out << reg_to_bin(regis);
+            out << endl;
         }
-        else if(opcode == "andTheyDontStopComing")        // process the OUT instruction
+        else if(opcode == "mirrorMirror")       // find function
         {
-            out << "1000";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0110";                      // number six
+            fin >> num;                         // read in the register
+            out << dec_to_binary(num);          // this function will conver to appropriate address
+            out << "000000";                    // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "mirrorMirror")        // process the OUT instruction
+        else if(opcode == "fairyGodMother")        // erase function
         {
-            out << "1001";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "0111";                      // number seven
+            fin >> num;                         // read in the register
+            out << dec_to_binary(num);          // this function will conver to appropriate address
+            out << "000000";                    // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "fairyGodMother")        // process the OUT instruction
+        else if(opcode == "rumpelstiltskin")        // clear function
         {
-            out << "1010";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "1000";                      // number eight
+            
+            out << "000000";                    // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "rumpelstiltskin")        // process the OUT instruction
+        else if(opcode == "threeBlindMice")        // multiplication function
         {
-            out << "1011";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
+            out << "1001";                      // number nine
+            for(int i = 0; i < 2; i++)          // for loop that loops 2 times
+            {
+                fin >> regis;                   // read in the register
+                out << reg_to_bin(regis);       // this function will conver to appropriate address
+            }
+            out << endl;            // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "threeBlindMice")        // process the OUT instruction
-        {
-            out << "1100";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
-        }
-        else if(opcode == "dragon")        // process the OUT instruction
-        {
-            out << "1101";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
-        }
-        else if(opcode == "foreverAfter")        // process the OUT instruction
-        {
-            out << "1110";              // OUT is 111 as described in my ISA
-            fin >> regis;               // read in the register
-            out << reg_to_bin(regis);   // this function will conver to appropriate address
-            out << "000000";            // this is padding, since instruction have to be fixed
-        }
-        else                            // this catches invalid instructions and kills program
+        
+        //        else if(opcode == "foreverAfter")       // process the OUT instruction
+        //        {
+        //            out << "1010";              // OUT is 111 as described in my ISA
+        //            fin >> regis;               // read in the register
+        //            out << reg_to_bin(regis);   // this function will conver to appropriate address
+        //            out << "000000";            // this is padding, since instruction have to be fixed
+        //        }
+        
+        else
         {
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
             exit(0);
@@ -151,41 +122,47 @@ int main()
 string dec_to_binary(int dec)
 {
     string bin = "";
-    
-    if(dec == 0)
-        return "0000000";
-    
-    while(dec / 2 != 0)
+    while(dec!=0)
     {
-        bin = to_string(dec % 2) + bin;
-        dec /= 2;
+        int mod = dec%2;
+        if(mod == 1)
+        {
+            bin = "1" + bin;
+        }
+        else
+        {
+            bin = "0" +bin;
+        }
+        dec = dec/2;
+        
     }
-    
-    bin = "1" + bin;
-    
-    while(bin.size() < 6)   // have to make sure that
-        bin = "0" + bin;    // each number uses 6 bits
-    
+    while(bin.length() < 6)
+    {
+        bin  = "0"+bin;
+    }
     return bin;
 }
-
 string reg_to_bin(string reg)
 {
-    if(reg == "R1")         // basically a simple if.. else
+    if(reg == "RegisterUno")         // basically a simple if.. else
         return "000";       // that will read in a register and
-    else if(reg == "R2")    // return the appropriate address.
+    else if(reg == "RegisterDoz")    // return the appropriate address.
         return "001";
-    else if(reg == "R3")
+    else if(reg == "RegisterTrez")
         return "010";
-    else if(reg == "R4")
+    else if(reg == "RegisterKuatro")
         return "011";
-    else if(reg == "R5")
+    else if(reg == "RegisterZinco")
         return "100";
-    else if(reg == "R6")
+    else if(reg == "RegisterZeiz")
         return "101";
-    else if(reg == "R7")
+    else if(reg == "RegisterZiete")
         return "110";
-    else if(reg == "R8")
+    else if(reg == "RegisterOsho")
+        return "111";
+    else if(reg == "ArrayUno")
+        return "000";
+    else if(reg == "ArrayDoz")
         return "111";
     else
     {

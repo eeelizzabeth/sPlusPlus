@@ -42,12 +42,14 @@ int main()
             out << "0010";                      // number two
             fin >> regis;
             out << reg_to_bin(regis);
-            out << "0000" << endl;
+            out << "000" << endl;
         }
         else if(opcode == "shrek4")             // halt function
         {
             out << "0011";                      // number three
-            out << "0000000";                 // this is padding, since instruction have to be fixed
+            out << "000000";
+            out << endl;
+            // this is padding, since instruction have to be fixed
         }
         else if(opcode == "putinboots")         // insert function
         {
@@ -72,20 +74,23 @@ int main()
             out << "0110";                      // number six
             fin >> num;                         // read in the register
             out << dec_to_binary(num);          // this function will conver to appropriate address
-            out << "000000";                    // this is padding, since instruction have to be fixed
+            out << "000";
+            out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "fairyGodMother")        // erase function
         {
             out << "0111";                      // number seven
-            fin >> num;                         // read in the register
-            out << dec_to_binary(num);          // this function will conver to appropriate address
-            out << "000000";                    // this is padding, since instruction have to be fixed
+            fin >> regis;                         // read in the register
+            out << reg_to_bin(regis);          // this function will conver to appropriate address
+            out << "000";
+            out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "rumpelstiltskin")        // clear function
         {
             out << "1000";                      // number eight
 
-            out << "000000";                    // this is padding, since instruction have to be fixed
+            out << "000000";
+            out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "threeBlindMice")        // multiplication function
         {
@@ -95,9 +100,10 @@ int main()
                 fin >> regis;                   // read in the register
                 out << reg_to_bin(regis);       // this function will conver to appropriate address
             }
+            out << "0";
             out << endl;            // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "mongo")        // multiplication function
+        else if(opcode == "mongo")        // input
         {
             out << "1010";                      // number nine
             fin>>regis;
@@ -106,13 +112,14 @@ int main()
         }
 
 
-        //        else if(opcode == "foreverAfter")       // process the OUT instruction
-        //        {
-        //            out << "1010";              // OUT is 111 as described in my ISA
-        //            fin >> regis;               // read in the register
-        //            out << reg_to_bin(regis);   // this function will conver to appropriate address
-        //            out << "000000";            // this is padding, since instruction have to be fixed
-        //        }
+        else if(opcode == "foreverAfter")       // process the OUT instruction
+        {
+            out << "1010";              // OUT is 111 as described in my ISA
+            fin >> regis;               // read in the register
+            out << reg_to_bin(regis);   // this function will conver to appropriate address
+            out << "000";
+            out << endl;// this is padding, since instruction have to be fixed
+        }
 
         else
         {

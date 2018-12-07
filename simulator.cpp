@@ -123,6 +123,28 @@ int main()
                 }
             }
         }
+        else if(opcode == "1000" )
+        {
+            for(map<string,int>::iterator it = reg_map.begin();it!=reg_map.end();it++)
+            {
+                it->second =0;
+            }
+            for(map<string,vector<int>>::iterator it = ary_map.begin();it!=ary_map.end();it++)
+            {
+                vector<int> vec;
+                it->second = vec;
+            }
+        }
+        else if(opcode == "1010")
+        {
+            string regisA = instruction.substr(4,3);
+            int val;
+            cin>>val;
+            reg_map[regisA] = val;
+        }
+
+    }
+
 
 
 

@@ -84,10 +84,8 @@ int main()
         }
         else if(opcode == "0101") //FarFarArray
         {
-            string n = instruction.substr(4,3);         // read the 6 bits related to size of array
-            int val = bin_to_dec(n);                    // convert binary to decimal
-            string regis = instruction.substr(7,3);    // find the 3 bits related to the array
-            ary_map[regis] = vector<int>(val);
+            string regis = instruction.substr(4,3);    // find the 3 bits related to the array
+            ary_map[regis] = vector<int>();
 
             /* Quick test to make sure this works (assume vector set to size 5)
              ary_map["000"][0] = 1;
@@ -106,14 +104,17 @@ int main()
             string regisB = instruction.substr(7,3);
             int val = reg_map[regisA];
             vector<int> vec = ary_map[regisB];
+            int index= -1;
             for(int i = 0;i<vec.size();i++)
             {
                 if(vec[i] == val)
                 {
-                    cout<<i<<endl;
+                    index = i;
+                    
                     break;
                 }
             }
+            cout << index << endl;
         }
         else if(opcode == "0111" )  //fairyGodMother
         {
@@ -142,7 +143,7 @@ int main()
                 it->second = vec;
             }
         }
-        else if(opcode == "1010") //mongo
+        else if(opcode == "1111") //mongo
         {
             string regisA = instruction.substr(4,3);
             int val;
@@ -153,20 +154,25 @@ int main()
         {
             string regisA = instruction.substr(4,3);
             int val = reg_map[regisA];
-            if(val != 0)
+            //cout<<val<<endl;
+            if(val > 1)
             {
                 val--;
                 reg_map[regisA] =val;
                 loop.push(i);
+                //cout<<"Loop Top: "<<loop.top()<<endl;
+                //cout<<"Val: "<<val<<endl;
             }
+            
 
         }
         else if(opcode == "1011") //neverAfter
         {
+            //cout<<"End Loop Top"<<loop.top()<<endl;
             if(!loop.empty())
             {
                 int temp = loop.top();
-                i =temp;
+                i =temp-1;
                 loop.pop();
 
             }

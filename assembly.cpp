@@ -63,18 +63,17 @@ int main()
         else if(opcode == "FARFARARRAY")        // create an array
         {
             out << "0101";                      // number five
-            fin >> num;                         // read in the register
-            out << dec_to_binary(num);          // this function will conver to appropriate address
             fin >> regis;
             out << reg_to_bin(regis);
-            out << endl;
+            out <<"000" <<endl;
         }
         else if(opcode == "MIRRORMIRROR")       // find function
         {
             out << "0110";                      // number six
-            fin >> num;                         // read in the register
-            out << dec_to_binary(num);          // this function will conver to appropriate address
-            out << "000";
+            fin >> regis;                         // read in the register
+            out << reg_to_bin(regis);
+            fin >> regis;                         // read in the register
+            out << reg_to_bin(regis);
             out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "FAIRYGODMOTHER")        // erase function

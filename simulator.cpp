@@ -66,16 +66,16 @@ int main()
             reg_map[regisA] = product_result;                       // place the result in the third register
 
         }
-        else if(opcode == "0010") //OUT                 // print to screen
+        else if(opcode == "0010") //Donkey                // print to screen
         {
             string regis = instruction.substr(4,3);     // find which register to print
             cout << reg_map[regis] << endl;             // use those 3 bits with map to find value.
         }
-        else if(opcode == "0011")
+        else if(opcode == "0011") //halt
         {
             break;
         }
-        else if(opcode == "0101") //MAKE THE ARRAY
+        else if(opcode == "0101") //FarFarArray
         {
             string n = instruction.substr(4,3);         // read the 6 bits related to size of array
             int val = bin_to_dec(n);                    // convert binary to decimal
@@ -93,7 +93,7 @@ int main()
              cout << i << endl
              */
         }
-        else if(opcode == "0110")
+        else if(opcode == "0110") //MirrorMirror
         {
             string regisA = instruction.substr(4,3);
             string regisB = instruction.substr(7,3);
@@ -108,7 +108,7 @@ int main()
                 }
             }
         }
-        else if(opcode == "0111" )
+        else if(opcode == "0111" )  //fairyGodMother
         {
             string regisA = instruction.substr(4,3);
             string regisB = instruction.substr(7,3);
@@ -123,7 +123,7 @@ int main()
                 }
             }
         }
-        else if(opcode == "1000" )
+        else if(opcode == "1000" )  //rumpelstiltskin
         {
             for(map<string,int>::iterator it = reg_map.begin();it!=reg_map.end();it++)
             {
@@ -135,7 +135,7 @@ int main()
                 it->second = vec;
             }
         }
-        else if(opcode == "1010")
+        else if(opcode == "1010") //mongo
         {
             string regisA = instruction.substr(4,3);
             int val;

@@ -12,7 +12,7 @@ int bin_to_dec(string bin);
 
 int main()
 {
-    ifstream fin("sum.o");                  // the file with binary code (0s and 1s)
+    ifstream fin("find.o");                  // the file with binary code (0s and 1s)
 
     if(fin.fail())                          // make sure file opened okay
     {

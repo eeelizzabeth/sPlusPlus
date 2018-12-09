@@ -8,8 +8,8 @@ string reg_to_bin(string reg);
 
 int main()
 {
-    ifstream fin("sum.spp");      // the file the assembler will interpret
-    ofstream out("sum.o");          // the file generated with 0s and 1s
+    ifstream fin("find.spp");      // the file the assembler will interpret
+    ofstream out("find.o");          // the file generated with 0s and 1s
 
     if(fin.fail())                  // always make sure the file was opened properly
     {

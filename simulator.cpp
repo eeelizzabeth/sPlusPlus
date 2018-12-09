@@ -142,6 +142,10 @@ int main()
             cin>>val;
             reg_map[regisA] = val;
         }
+        else if(opcode == "1011") //neverAfter
+        {
+
+        }
 
     }
 

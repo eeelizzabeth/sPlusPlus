@@ -120,6 +120,12 @@ int main()
             out << "000";
             out << endl;// this is padding, since instruction have to be fixed
         }
+        else if(opcode == "neverAfter")       // process the OUT instruction
+        {
+            out << "1011";              // OUT is 111 as described in my ISA
+            out << "000000";
+            out << endl;// this is padding, since instruction have to be fixed
+        }
 
         else
         {

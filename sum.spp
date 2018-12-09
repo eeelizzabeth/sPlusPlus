@@ -1,5 +1,5 @@
-putinboots 5 R1
-putinboots 2 R2
-onions R1 R2 R3
-donkey R3
-shrek4
+PUTINBOOTS 5 RegisterUno
+PUTINBOOTS 2 RegisterDoz
+ONIONS RegisterUno RegisterDoz
+DONKEY RegisterUno
+SHREK4

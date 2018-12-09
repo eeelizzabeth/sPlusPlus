@@ -26,7 +26,7 @@ int main()
     {
         fin >> opcode;                          // the first line of every instruction is instruction
 
-        if(opcode == "onions")                  // adding function
+        if(opcode == "ONIONS")                  // adding function
         {
             out << "0001";                      // number one
             for(int i = 0; i < 2; i++)
@@ -37,21 +37,21 @@ int main()
             out << "0";
             out << endl;                        // line break
         }
-        else if(opcode == "donkey")             // output function
+        else if(opcode == "DONKEY")             // output function
         {
             out << "0010";                      // number two
             fin >> regis;
             out << reg_to_bin(regis);
             out << "000" << endl;
         }
-        else if(opcode == "shrek4")             // halt function
+        else if(opcode == "SHREK4")             // halt function
         {
             out << "0011";                      // number three
             out << "000000";
             out << endl;
             // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "putinboots")         // insert function
+        else if(opcode == "PUTINBOOTS")         // insert function
         {
             out << "0100";                      // number four
             fin >> num;
@@ -60,7 +60,7 @@ int main()
             out << reg_to_bin(regis);
             out << endl;
         }
-        else if(opcode == "farFarArray")        // create an array
+        else if(opcode == "FARFARARRAY")        // create an array
         {
             out << "0101";                      // number five
             fin >> num;                         // read in the register
@@ -69,7 +69,7 @@ int main()
             out << reg_to_bin(regis);
             out << endl;
         }
-        else if(opcode == "mirrorMirror")       // find function
+        else if(opcode == "MIRRORMIRROR")       // find function
         {
             out << "0110";                      // number six
             fin >> num;                         // read in the register
@@ -77,7 +77,7 @@ int main()
             out << "000";
             out << endl;// this is padding, since instruction have to be fixed
         }
-        else if(opcode == "fairyGodMother")        // erase function
+        else if(opcode == "FAIRYGODMOTHER")        // erase function
         {
             out << "0111";                      // number seven
             fin >> regis;                         // read in the register
@@ -85,14 +85,14 @@ int main()
             out << "000";
             out << endl;// this is padding, since instruction have to be fixed
         }
-        else if(opcode == "rumpelstiltskin")        // clear function
+        else if(opcode == "RUMPELSTILTSKIN")        // clear function
         {
             out << "1000";                      // number eight
 
             out << "000000";
             out << endl;// this is padding, since instruction have to be fixed
         }
-        else if(opcode == "threeBlindMice")        // multiplication function
+        else if(opcode == "THREEBLINDMICE")        // multiplication function
         {
             out << "1001";                      // number nine
             for(int i = 0; i < 2; i++)          // for loop that loops 2 times
@@ -103,7 +103,7 @@ int main()
             out << "0";
             out << endl;            // this is padding, since instruction have to be fixed
         }
-        else if(opcode == "mongo")        // input
+        else if(opcode == "MONGO")        // input
         {
             out << "1010";                      // number nine
             fin>>regis;
@@ -112,7 +112,7 @@ int main()
         }
 
 
-        else if(opcode == "foreverAfter")       // process the OUT instruction
+        else if(opcode == "FOREVERAFTER")       // process the OUT instruction
         {
             out << "1010";              // OUT is 111 as described in my ISA
             fin >> regis;               // read in the register
@@ -120,13 +120,13 @@ int main()
             out << "000";
             out << endl;// this is padding, since instruction have to be fixed
         }
-        else if(opcode == "neverAfter")       // process the OUT instruction
+        else if(opcode == "NEVERAFTER")       // process the OUT instruction
         {
             out << "1011";              // OUT is 111 as described in my ISA
             out << "000000";
             out << endl;// this is padding, since instruction have to be fixed
         }
-        else if(opcode == "andTheyDontStopComing")       // process the OUT instruction
+        else if(opcode == "ANDTHEYDONTSTOPCOMING")       // process the OUT instruction
         {
             out << "1110";              // OUT is 111 as described in my ISA
             fin >> regis;

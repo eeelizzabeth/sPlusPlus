@@ -23,7 +23,7 @@ int main()
     string instruction;                     // hold the entire binary instruction
     string opcode;                          // hold the binary opcode (4 bits)
     map<string, int> reg_map;               // a map from strings to ints used for registers
-    vector<string> commands;
+
     map<string, vector<int> > ary_map;        // a map from strings to vector<int> used for arrays
     reg_map["000"] = 0;                     //r1
     reg_map["001"] = 0;                     //r2
@@ -40,7 +40,6 @@ int main()
         i++;
         fin >> instruction;                         // read in the entire line of instrcution (13 bits)
         opcode = instruction.substr(0,4);           // take the first 4 bits of the instruction
-        commands.push_back(instruction);
         if(opcode == "0100") //PUT                  // if the first 4 bits are PUT
         {
             string n = instruction.substr(4,3);     // read the 6 bits related to numerical value
@@ -164,6 +163,15 @@ int main()
                 GotoLine(fin,temp);
 
             }
+        }
+        else if(opcode == "1110")//andTheyDontStopComing
+        {
+            string regisA = instruction.substr(4,3);
+            string regisB = instruction.substr(7,3);
+            int val = reg_map[regisA];
+            vector<int> vec = ary_map[regisB];
+            vec.push_back(val);
+            ary_map[regisB] = vec;
         }
 
     }

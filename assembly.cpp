@@ -130,9 +130,9 @@ int main()
         {
             out << "1110";              // OUT is 111 as described in my ISA
             fin >> regis;
-            out << reg_to_bin(regis)
+            out << reg_to_bin(regis);
             fin >> regis;
-            out << reg_to_bin(regis)
+            out << reg_to_bin(regis);
             out << endl;// this is padding, since instruction have to be fixed
         }
 

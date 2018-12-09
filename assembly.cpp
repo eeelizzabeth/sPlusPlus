@@ -8,7 +8,7 @@ string reg_to_bin(string reg);
 
 int main()
 {
-    ifstream fin("sum.coria");      // the file the assembler will interpret
+    ifstream fin("sum.spp");      // the file the assembler will interpret
     ofstream out("sum.o");          // the file generated with 0s and 1s
 
     if(fin.fail())                  // always make sure the file was opened properly

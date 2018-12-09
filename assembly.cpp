@@ -105,7 +105,7 @@ int main()
         }
         else if(opcode == "MONGO")        // input
         {
-            out << "1010";                      // number nine
+            out << "1111";                      // number nine
             fin>>regis;
             out<<reg_to_bin(regis);
             out << "000"<<endl;            // this is padding, since instruction have to be fixed

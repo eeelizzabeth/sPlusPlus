@@ -5,7 +5,7 @@
 #include <cmath>
 #include <map>
 #include <vector>
-
+#include <stack>
 using namespace std;
 
 int bin_to_dec(string bin);
@@ -19,11 +19,12 @@ int main()
         cout << "File open failed\n";
         exit(0);
     }
-
+    ifstream& GotoLine(ifstream& file,unsigned int num);
     string instruction;                     // hold the entire binary instruction
     string opcode;                          // hold the binary opcode (4 bits)
     map<string, int> reg_map;               // a map from strings to ints used for registers
-    map<string, vector<int>> ary_map;        // a map from strings to vector<int> used for arrays
+    vector<string> commands;
+    map<string, vector<int> > ary_map;        // a map from strings to vector<int> used for arrays
     reg_map["000"] = 0;                     //r1
     reg_map["001"] = 0;                     //r2
     reg_map["010"] = 0;                     //r3
@@ -32,12 +33,14 @@ int main()
     reg_map["101"] = 0;                     //r6
     reg_map["110"] = 0;                     //r7
     reg_map["111"] = 0;                     //r8
-
+    int i=0;
+    stack<int> loop;
     while(!fin.eof())
     {
+        i++;
         fin >> instruction;                         // read in the entire line of instrcution (13 bits)
         opcode = instruction.substr(0,4);           // take the first 4 bits of the instruction
-
+        commands.push_back(instruction);
         if(opcode == "0100") //PUT                  // if the first 4 bits are PUT
         {
             string n = instruction.substr(4,3);     // read the 6 bits related to numerical value
@@ -129,7 +132,7 @@ int main()
             {
                 it->second =0;
             }
-            for(map<string,vector<int>>::iterator it = ary_map.begin();it!=ary_map.end();it++)
+            for(map<string,vector<int> >::iterator it = ary_map.begin();it!=ary_map.end();it++)
             {
                 vector<int> vec;
                 it->second = vec;
@@ -142,9 +145,25 @@ int main()
             cin>>val;
             reg_map[regisA] = val;
         }
+        else if(opcode =="1010")//Forever after
+        {
+            string regisA = instruction.substr(4,3);
+            int val = reg_map[regisA];
+            if(val != 0)
+            {
+                loop.push(i);
+            }
+
+        }
         else if(opcode == "1011") //neverAfter
         {
+            if(!loop.empty())
+            {
+                int temp = loop.top();
+                loop.pop();
+                GotoLine(fin,temp);
 
+            }
         }
 
     }

@@ -54,7 +54,7 @@ int main()
         {
             out << "0100";                      // number four
             fin >> num;
-            out << dec_to_binary(num);
+            out << reg_to_bin(regis);
             fin >> regis;
             out << reg_to_bin(regis);
             out << endl;
@@ -165,7 +165,7 @@ string dec_to_binary(int dec)
         dec = dec/2;
 
     }
-    while(bin.length() < 6)
+    while(bin.length() < 3)
     {
         bin  = "0"+bin;
     }

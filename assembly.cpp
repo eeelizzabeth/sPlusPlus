@@ -53,7 +53,7 @@ int main()
         else if(opcode == "PUTINBOOTS")         // insert function
         {
             out << "0100";                      // number four
-            fin >> num;
+            fin >> regis;
             out << reg_to_bin(regis);
             fin >> regis;
             out << reg_to_bin(regis);
@@ -82,7 +82,7 @@ int main()
             out << reg_to_bin(regis);          // this function will
             fin >> regis;
             out << reg_to_bin(regis);
-            
+
             out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "RUMPELSTILTSKIN")        // clear function
@@ -130,6 +130,15 @@ int main()
             out << "1110";              // OUT is 111 as described in my ISA
             fin >> regis;
             out << reg_to_bin(regis);
+            fin >> regis;
+            out << reg_to_bin(regis);
+            out << endl;// this is padding, since instruction have to be fixed
+        }
+        else if(opcode == "HAPPILYEVERAFTER")       // process the OUT instruction
+        {
+            out << "1100";              // OUT is 111 as described in my ISA
+            fin >> num;
+            out << dec_to_binary(num);
             fin >> regis;
             out << reg_to_bin(regis);
             out << endl;// this is padding, since instruction have to be fixed

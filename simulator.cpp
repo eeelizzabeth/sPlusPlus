@@ -35,6 +35,7 @@ int main()
     reg_map["111"] = 0;                     //r8
     //int i=0;
     stack<int> loop;
+    stack<int> vals;
     while(!fin.eof())
     {
 
@@ -48,8 +49,8 @@ int main()
         if(opcode == "0100") //PUT                  // if the first 4 bits are PUT
         {
             string n = instruction.substr(4,3);     // read the 6 bits related to numerical value
-            int val = bin_to_dec(n);                // convert binary to decimal
-
+            int val = reg_map[n];                // convert binary to decimal
+            //ncout<<"here "<<val<<endl;
             string regis = instruction.substr(7,3);    // find the 3 bits related to the register
             reg_map[regis] = val;                       // use those 3 bits as location to store value
         }
@@ -110,7 +111,7 @@ int main()
                 if(vec[i] == val)
                 {
                     index = i;
-                    
+
                     break;
                 }
             }
@@ -154,16 +155,27 @@ int main()
         {
             string regisA = instruction.substr(4,3);
             int val = reg_map[regisA];
+            if(loop.empty())
+            {
+                loop.push(i);
+                vals.push(val);
+            }
+            if(loop.top()!= i)
+            {
+                loop.push(i);
+                vals.push(val);
+            }
             //cout<<val<<endl;
-            if(val > 1)
+            if(val >= 1)
             {
                 val--;
                 reg_map[regisA] =val;
-                loop.push(i);
+                vals.pop();
+                vals.push(val);
                 //cout<<"Loop Top: "<<loop.top()<<endl;
                 //cout<<"Val: "<<val<<endl;
             }
-            
+
 
         }
         else if(opcode == "1011") //neverAfter
@@ -171,13 +183,31 @@ int main()
             //cout<<"End Loop Top"<<loop.top()<<endl;
             if(!loop.empty())
             {
-                int temp = loop.top();
-                i =temp-1;
-                loop.pop();
+                if(vals.top()<=0)
+                {
+                    loop.pop();
+                    vals.pop();
+                }
+                else
+                {
+                    int temp = loop.top();
+                    i =temp-1;
+                }
+
+
 
             }
         }
         else if(opcode == "1110")//andTheyDontStopComing
+        {
+            string regisA = instruction.substr(4,3);
+            string regisB = instruction.substr(7,3);
+            int val = reg_map[regisA];
+            vector<int> vec = ary_map[regisB];
+            vec.push_back(val);
+            ary_map[regisB] = vec;
+        }
+        else if(opcode == "1100")//andTheyDontStopComing
         {
             string regisA = instruction.substr(4,3);
             string regisB = instruction.substr(7,3);

@@ -63,7 +63,7 @@ int main()
             reg_map[regisA] = sum_result;                       // place the result in the third register
 
         }
-        else if(opcode == "0001") //multiply                 // SUM instruction is followed by three registers
+        else if(opcode == "1001") //multiply                 // SUM instruction is followed by three registers
         {
             string regisA = instruction.substr(4,3);    // bits 4-6 are the first register
             string regisB = instruction.substr(7,3);    // bits 7-9 are the second register

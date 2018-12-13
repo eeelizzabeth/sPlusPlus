@@ -34,7 +34,6 @@ int main()
                 fin >> regis;                   // read in the register
                 out << reg_to_bin(regis);       // this function will conver to appropriate address
             }
-            out << "0";
             out << endl;                        // line break
         }
         else if(opcode == "DONKEY")             // output function
@@ -80,8 +79,10 @@ int main()
         {
             out << "0111";                      // number seven
             fin >> regis;                         // read in the register
-            out << reg_to_bin(regis);          // this function will conver to appropriate address
-            out << "000";
+            out << reg_to_bin(regis);          // this function will
+            fin >> regis;
+            out << reg_to_bin(regis);
+            
             out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "RUMPELSTILTSKIN")        // clear function
@@ -99,7 +100,6 @@ int main()
                 fin >> regis;                   // read in the register
                 out << reg_to_bin(regis);       // this function will conver to appropriate address
             }
-            out << "0";
             out << endl;            // this is padding, since instruction have to be fixed
         }
         else if(opcode == "MONGO")        // input

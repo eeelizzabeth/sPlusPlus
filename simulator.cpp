@@ -1,4 +1,9 @@
 //simulator.cpp
+//Elizabeth Hernandez
+//Matthew Lambert
+//Iris Manriquez
+//Frank Duenez
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -12,8 +17,8 @@ int bin_to_dec(string bin);
 
 int main()
 {
-    ifstream fin("find.o");                  // the file with binary code (0s and 1s)
-
+    ifstream fin("flex.o");                  // the file with binary code (0s and 1s)
+    
     if(fin.fail())                          // make sure file opened okay
     {
         cout << "File open failed\n";
@@ -38,7 +43,7 @@ int main()
     stack<int> vals;
     while(!fin.eof())
     {
-
+        
         fin >> instruction;
         commands.push_back(instruction);
     }                        // read in the entire line of instrcution (13 bits)
@@ -59,20 +64,20 @@ int main()
             string regisA = instruction.substr(4,3);    // bits 4-6 are the first register
             string regisB = instruction.substr(7,3);    // bits 7-9 are the second register
             // bits 10-12 are the last register
-
+            
             int sum_result = reg_map[regisA] + reg_map[regisB]; // add the first two registers
             reg_map[regisA] = sum_result;                       // place the result in the third register
-
+            
         }
         else if(opcode == "1001") //multiply                 // SUM instruction is followed by three registers
         {
             string regisA = instruction.substr(4,3);    // bits 4-6 are the first register
             string regisB = instruction.substr(7,3);    // bits 7-9 are the second register
             // bits 10-12 are the last register
-
+            
             int product_result = reg_map[regisA] * reg_map[regisB]; // add the first two registers
             reg_map[regisA] = product_result;                       // place the result in the third register
-
+            
         }
         else if(opcode == "0010") //Donkey                // print to screen
         {
@@ -87,14 +92,14 @@ int main()
         {
             string regis = instruction.substr(4,3);    // find the 3 bits related to the array
             ary_map[regis] = vector<int>();
-
+            
             /* Quick test to make sure this works (assume vector set to size 5)
              ary_map["000"][0] = 1;
              ary_map["000"][1] = 3;
              ary_map["000"][2] = 5;
              ary_map["000"][3] = 7;
              ary_map["000"][4] = 9;
-
+             
              for(int &i: ary_map["000"])
              cout << i << endl
              */
@@ -111,7 +116,7 @@ int main()
                 if(vec[i] == val)
                 {
                     index = i;
-
+                    
                     break;
                 }
             }
@@ -148,6 +153,7 @@ int main()
         {
             string regisA = instruction.substr(4,3);
             int val;
+            cout<<"Input: ";
             cin>>val;
             reg_map[regisA] = val;
         }
@@ -175,8 +181,8 @@ int main()
                 //cout<<"Loop Top: "<<loop.top()<<endl;
                 //cout<<"Val: "<<val<<endl;
             }
-
-
+            
+            
         }
         else if(opcode == "1011") //neverAfter
         {
@@ -193,9 +199,9 @@ int main()
                     int temp = loop.top();
                     i =temp-1;
                 }
-
-
-
+                
+                
+                
             }
         }
         else if(opcode == "1110")//andTheyDontStopComing
@@ -207,23 +213,91 @@ int main()
             vec.push_back(val);
             ary_map[regisB] = vec;
         }
-        else if(opcode == "1100")//andTheyDontStopComing
+        else if(opcode == "1100")//HapilyEverAfter
         {
             string regisA = instruction.substr(4,3);
             string regisB = instruction.substr(7,3);
-            int val = reg_map[regisA];
+            int val = bin_to_dec(regisA);
             vector<int> vec = ary_map[regisB];
-            vec.push_back(val);
+            if(val == 0)
+            {
+                cout<<"Enter the index to modify"<<endl;
+                int i;
+                cin>>i;
+                if(i>=vec.size())
+                {
+                    cout<<"Error no element at index i"<<endl;
+                    break;
+                }
+                cout<<"What do you want to add by?"<<endl;
+                int val;
+                cin>>val;
+                vec[i]+=val;
+                cout<<"New value "<<vec[i]<<endl;
+            }
+            else if(val == 1)
+            {
+                cout<<"Enter the index to modify"<<endl;
+                int i;
+                cin>>i;
+                if(i>=vec.size())
+                {
+                    cout<<"Error no element at index i"<<endl;
+                    break;
+                }
+                cout<<"What do you want to subtract by?"<<endl;
+                int val;
+                cin>>val;
+                
+                vec[i]-=val;
+                cout<<"New value "<<vec[i]<<endl;
+            }
+            else if(val == 2)
+            {
+                cout<<"Enter the index to modify"<<endl;
+                int i;
+                cin>>i;
+                if(i>=vec.size())
+                {
+                    cout<<"Error no element at index i"<<endl;
+                    break;
+                }
+                cout<<"What do you want to multiply by?"<<endl;
+                int val;
+                cin>>val;
+                vec[i]*=val;
+                cout<<"New value "<<vec[i]<<endl;
+            }
+            else if(val == 3)
+            {
+                cout<<"Enter the index to modify"<<endl;
+                int i;
+                cin>>i;
+                if(i>=vec.size())
+                {
+                    cout<<"Error no element at index i"<<endl;
+                    break;
+                }
+                cout<<"What do you want to divide by?"<<endl;
+                int val;
+                cin>>val;
+                vec[i]/=val;
+                cout<<"New value "<<vec[i]<<endl;
+            }
+            else if(val == 4)
+            {
+                cout<<vec.size()<<endl;
+            }
             ary_map[regisB] = vec;
         }
-
+        
     }
-
-
-
-
+    
+    
+    
+    
     fin.close();
-
+    
     return 0;
 }
 
@@ -233,6 +307,6 @@ int bin_to_dec(string bin)
     for (int i = 0; i < bin.length(); i++)
         if (bin[i] == '1')
             num += pow(2, bin.length() - 1 - i);
-
+    
     return num;
 }

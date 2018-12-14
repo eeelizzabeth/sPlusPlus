@@ -1,3 +1,8 @@
+//Elizabeth Hernandez
+//Matthew Lambert
+//Iris Manriquez
+//Frank Duenez
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -8,24 +13,24 @@ string reg_to_bin(string reg);
 
 int main()
 {
-    ifstream fin("find.spp");      // the file the assembler will interpret
-    ofstream out("find.o");          // the file generated with 0s and 1s
-
+    ifstream fin("flex.spp");      // the file the assembler will interpret
+    ofstream out("flex.o");          // the file generated with 0s and 1s
+    
     if(fin.fail())                  // always make sure the file was opened properly
     {
         cout << "File open failed\n";
         exit(0);
     }
-
+    
     string opcode;                  // store the instruction in opcode
     int num;                        // if i need to store a number from the instruction
     string regis;                   // if i am reading a register. Note I have 8 registered
     // which i call: R1, R2, R3, R4, R5, R6, R7, and R8.
-
+    
     while(!fin.eof())                           // while not reached end of file
     {
         fin >> opcode;                          // the first line of every instruction is instruction
-
+        
         if(opcode == "ONIONS")                  // adding function
         {
             out << "0001";                      // number one
@@ -82,13 +87,13 @@ int main()
             out << reg_to_bin(regis);          // this function will
             fin >> regis;
             out << reg_to_bin(regis);
-
+            
             out << endl;// this is padding, since instruction have to be fixed
         }
         else if(opcode == "RUMPELSTILTSKIN")        // clear function
         {
             out << "1000";                      // number eight
-
+            
             out << "000000";
             out << endl;// this is padding, since instruction have to be fixed
         }
@@ -109,8 +114,8 @@ int main()
             out<<reg_to_bin(regis);
             out << "000"<<endl;            // this is padding, since instruction have to be fixed
         }
-
-
+        
+        
         else if(opcode == "FOREVERAFTER")       // process the OUT instruction
         {
             out << "1010";              // OUT is 111 as described in my ISA
@@ -143,17 +148,17 @@ int main()
             out << reg_to_bin(regis);
             out << endl;// this is padding, since instruction have to be fixed
         }
-
+        
         else
         {
             cout << "ERROR: INSTRUCTION DOESN'T EXIST\n";
             exit(0);
         }
     }
-
+    
     fin.close();
     out.close();
-
+    
     return 0;
 }
 
@@ -172,7 +177,7 @@ string dec_to_binary(int dec)
             bin = "0" +bin;
         }
         dec = dec/2;
-
+        
     }
     while(bin.length() < 3)
     {
